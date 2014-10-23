@@ -1,0 +1,42 @@
+{
+	"name": "Infected",
+	"value": 2350,
+	"children": [
+		{
+			"name": "Male Child",
+			"value": 281,
+			"children": [
+				{"name": "Male Child Lower", "value": 250},
+				{"name": "M", "value": 25},
+				{"name": "U", "value": 6}
+			]
+		},
+		{
+			"name": "Male Adult",
+			"value": 1200,
+			"children": [
+				{"name": "Male Adult Lower", "value": 1068},
+				{"name": "M", "value": 108},
+				{"name": "U", "value": 24}
+			]
+		},
+		{
+			"name": "Female Child",
+			"value": 408,
+			"children": [
+				{"name": "Female Child Lower", "value": 363},
+				{"name": "M", "value": 37},
+				{"name": "U", "value": 8}
+			]
+		},
+		{
+			"name": "Female Adult",
+			"value": 461,
+			"children": [
+				{"name": "Female Adult Lower", "value": 410},
+				{"name": "M", "value": 41},
+				{"name": "U", "value": 9}
+			]
+		}
+	]
+}

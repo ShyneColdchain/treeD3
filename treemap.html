@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Treemap Trial</title>
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,900,700italic|Open+Sans:400,700' rel='stylesheet' type='text/css'>
+<style>
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: hsla(295, 50%, 79%, 0.3);;
+}
+
+P.blockText {
+	margin-left: auto;
+	margin-right: auto; 
+	width: 60em;
+}
+
+footer {
+	font-family: 'Roboto', sans-serif;
+	font-size: 10px;
+	margin-left: auto;
+	margin-right: auto; 
+	width: 40em;
+}
+
+.cell { 
+	font-family: 'Roboto', sans-serif;
+}
+
+.cell:hover {
+	fill: hsla(250, 75%, 25%, .8);
+	font-size: 20px;
+}
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+
+<h1>D3 - Treemap</h1>
+
+<script>
+
+	var width = 1440,
+		height = 800;
+		
+	var color = d3.scale.category10();
+	
+	var canvas = d3.select("body").append("svg")
+		.attr("width", width)
+		.attr("height", height);
+		
+	d3.json("tree3.json", function(error, data) { 
+			
+			
+			var treemap = d3.layout.treemap()
+				.size([width, height])
+				.nodes(data)
+				
+			var cells = canvas.selectAll(".cell")
+				.data(treemap)
+				.enter()
+				.append("g")
+				.attr("class", "cell")
+				
+			cells.append("rect")
+				.attr("x", function(d) { return d.x; })
+				.attr("y", function(d) { return d.y; })
+				.attr("width", function(d) { return d.dx - 10; })
+				.attr("height", function(d) { return d.dy - 10; })
+				// every element may not have parent element
+				// if no children, return NULL, else return color! 
+				.attr("fill", function(d) { 
+					return d.children ? null : color(d.parent.name); })
+				
+				// if every object HAD parent element: 
+				//.attr("fill", function(d) { return color(d.parent.name);})
+				
+			cells.append("text")
+				.attr("x", function(d) { return d.x + d.dx / 2 }) // text in middle
+				.attr("y", function(d) { return d.y + d.dy / 2 }) // text in middle
+				.attr("text-anchor", "middle")
+				.text(function(d) { return d.children ? null : d.name; })
+	
+	
+	})
+
+
+</script>
+
+
+<h2>Treemap Layout</h2>
+
+<p class="blockText">Class, gender, and age (adult vs child) of infected people. Spread of 2350 infected people between several variables - class, gender, and age. Class is broken down to lower, middle (M), upper (U). Gender is broken down to male and female. Age is broken down to child and adult. Color scale represents the same leaf on the tree map. For example, red corresponds to all female adults infected. Blue represents all male children infected.</p>
+
+<footer>
+	<aside>Oct, 2014 - Oliver Muellerklein</aside>
+</footer>
